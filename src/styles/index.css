@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+    --color-bg: #0F1115;          
+    /* main page background */
+
+    --color-bg-secondary: #404860; 
+    /* secondary background (search bar, navbar sections) */
+
+    --color-card: #171A23;        
+    /* card background */
+
+    --color-card-alt: #1E2230;    
+    /* elevated card */
+
+    --color-surface: #232738;     
+    /* inputs, dropdowns, tooltips */
+
+    --color-border: #2E3345;      
+    /* borders */
+
+    --color-accent: #6366F1;      
+    /* modern indigo primary */
+
+    --color-accent-red: #EF4444;  
+    /* alert / badge */
+
+    --color-accent-blue: #3B82F6; 
+    /* info / secondary accent */
+
+    --color-text: #E5E7EB;        
+    /* main text */
+
+    --color-muted: #9CA3AF;       
+    /* secondary text */
+}
+*{
+    font-family: sans-serif;
+}
+.normeF{
+    font-family: sans-serif;
+}
+.curseve{
+    font-family: 'Great Vibes', cursive;
+}
+
+.slideFade{
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeUp 1s ease forwards;
+}
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    transform: translateX(0);
+  }
+}
+
+.card-title {
+    line-height: 1.1;
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes glitch {
+          0%, 90%, 100% { 
+            text-shadow: 3px 0 var(--muted), -3px 0 var(--accent);
+            transform: translate(0);
+          }
+          92% { 
+            text-shadow: -4px 0 var(--accent), 4px 0 var(--muted);
+            transform: translate(-3px, 1px);
+          }
+          94% { 
+            text-shadow: 4px 0 var(--muted), -4px 0 var(--accent);
+            transform: translate(3px, -1px);
+          }
+          96% {
+            text-shadow: -4px 0 var(--accent), 4px 0 var(--muted);
+            transform: translate(0);
+          }
+        }
+
+        @keyframes flicker {
+          0%, 95%, 100% { opacity: 0.05; }
+          96% { opacity: 0.08; }
+          97% { opacity: 0.03; }
+          98% { opacity: 0.07; }
+        }
