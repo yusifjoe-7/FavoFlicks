@@ -2,8 +2,6 @@ import type { cast } from "../types/types"
 
 export default function CastCard({ data }: { data: cast }) {
 
-    const bg = "https://image.tmdb.org/t/p/w500" + data.profile_path;
-    const b = { backgroundImage: `url(${bg})` }
 
   return (
    <div className="flex flex-col items-center gap-2 mx-2 w-20 shrink-0">
