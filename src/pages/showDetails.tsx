@@ -80,10 +80,10 @@ export default function ShowDetails() {
 
      
 
-      <div className="relative mx-auto w-full bg-card  flex flex-col items-center">
+      <div className=" w-full bg-bg  flex flex-col items-center">
 
-             <Link to= {"/"}><HomeIcon className="text-4xl text-text cursor-pointer absolute top-[2%] left-[5%] z-80" /> </Link>
-            <ArrowBackIcon className="text-4xl text-text cursor-pointer absolute top-[2%] right-[5%] z-80" onClick={()=>navigate(-1)} /> 
+             <Link to= {"/"}><HomeIcon className="text-4xl text-text cursor-pointer absolute top-[3%] left-[5%] z-80" /> </Link>
+            <ArrowBackIcon className="text-4xl text-text cursor-pointer absolute top-[3%] right-[5%] z-80" onClick={()=>navigate(-1)} /> 
          
         <div className="w-full h-60 bg-cover bg-contain bg-auto bg-center opacity-50 sticky"
           style={{ backgroundImage: `url(${backdrop})` }}></div>

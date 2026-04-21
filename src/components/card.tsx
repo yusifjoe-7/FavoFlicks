@@ -1,6 +1,6 @@
 import type { movie } from "../types/types"
 import { useFavorites } from "../hooks/favoriteContext";
- import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
  
@@ -13,19 +13,22 @@ export default function Card({ data }: { data: movie }) {
   const rate = data.vote_average.toFixed(1);
  
  
-  
+  const navigate = useNavigate()
  
   const { isFavorite, toggleFavorite } = useFavorites()
  
   return (
-    <Link to={`/details/${data.media_type}/${data.id}`} >
+    
     <div
       className="flex flex-col items-center mx-5 mb-12 transition sm:hover:scale-110"
       id={String(data.id)}
+      onClick={(e) => {
+        e.stopPropagation();
+        navigate(`/details/${data.media_type}/${data.id}`)}}
     >
       {/* الصورة */}
       <div
-        className="sm:w-33 w-20 aspect-2/3 rounded-xl shadow-2xl bg-cover bg-contain bg-auto z-30"
+        className="sm:w-33 w-20 aspect-2/3 rounded-xl shadow-2xl bg-cover bg-contain bg-auto z-30 bg-gray-500"
         style={{ backgroundImage: `url(${poster})` }}
       >
         <div
@@ -33,7 +36,7 @@ export default function Card({ data }: { data: movie }) {
             e.stopPropagation();
             toggleFavorite({ id: String(data.id), media_type: data.media_type });
           }}
-          className="m-1"
+          className="m-1 w-fit"
         >
           {isFavorite(String(data.id)) ? <FavoriteIcon className="text-accent-red" /> : <FavoriteBorderIcon />}
         </div>
@@ -54,6 +57,6 @@ export default function Card({ data }: { data: movie }) {
         </div>
       </div>
     </div>
-    </Link>
+    
   )
 }
