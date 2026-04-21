@@ -4,10 +4,10 @@ export default function CastCard({ data }: { data: cast }) {
 
 
   return (
-   <div className="flex flex-col items-center gap-2 mx-2 w-20 shrink-0">
+   <div className="flex flex-col items-center gap-2 mx-2 w-20 shrink-0 ">
       
       <div
-        className="w-16 h-20 rounded-xl bg-cover bg-center bg-no-repeat shrink-0"
+        className="w-16 h-20 rounded-xl bg-cover bg-center bg-no-repeat shrink-0 hover:ring-2 ring-accent"
         style={{
           backgroundImage: data.profile_path
             ? `url(https://image.tmdb.org/t/p/w185${data.profile_path})`

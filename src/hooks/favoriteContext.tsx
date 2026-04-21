@@ -3,14 +3,14 @@ import type { ReactNode } from "react";
  
 // ✅ بدل ما نخزّن ID بس، بنخزّن object فيه id و media_type
 type FavoriteItem = {
-  id: number;
+  id: string;
   media_type: "movie" | "tv";
 };
  
 type FavoritesContextType = {
   favorites: FavoriteItem[];
   toggleFavorite: (item: FavoriteItem) => void;
-  isFavorite: (id: number) => boolean;
+  isFavorite: (id: string) => boolean;
 };
  
 const FavoritesContext = createContext<FavoritesContextType | null>(null);
@@ -38,7 +38,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   };
  
   // check favorite
-  const isFavorite = (id: number) => {
+  const isFavorite = (id: string) => {
     return favorites.some((f) => f.id === id);
   };
  

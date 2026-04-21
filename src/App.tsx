@@ -1,36 +1,29 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-
-import { useOpen } from "./hooks/movieDetailsContext"
+import { Routes, Route, useLocation } from "react-router-dom"
+import { useMatch } from "react-router-dom"
 
 import Nav from "./components/nav"
 import Home from "./pages/home"
 import Favorites from "./pages/favorites"
 import Discover from "./pages/discover"
-import MovieDetails from "./components/movieDetails"
 import NotFound from "./pages/notFound"
 import Search from "./pages/search"
-
+import ShowDetails from "./pages/showDetails"
 
 function App() {
-  const { isOpend } = useOpen();
- 
+  const matchDetails = useMatch("/details/:media_type/:id")
+  const hideNav = !!matchDetails  // true لو الـ URL يطابق الباترن
 
   return (
     <div className="text-text bg-bg">
-      <BrowserRouter>
-        <Nav />
-        <Routes>
-
-          <Route path="/" element={< Home />} />
-          <Route path="/discover" element={<Discover />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="*" element={< NotFound/>} />
-
-        </Routes>
-      </BrowserRouter>
-      {isOpend && <MovieDetails />}
-
+      {!hideNav && <Nav />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/discover" element={<Discover />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/details/:media_type/:id" element={<ShowDetails />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   )
 }

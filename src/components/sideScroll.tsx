@@ -32,6 +32,7 @@ export default function SideScroll({ children }: { children: ReactNode }) {
     });
   };
 
+
   return (
     <div className="relative w-full self-start flex items-center min-h-5 my-2">
 

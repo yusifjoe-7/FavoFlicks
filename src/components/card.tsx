@@ -1,7 +1,6 @@
 import type { movie } from "../types/types"
-import { useOpen } from "../hooks/movieDetailsContext";
 import { useFavorites } from "../hooks/favoriteContext";
- 
+ import { Link } from "react-router-dom";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
  
@@ -13,20 +12,16 @@ export default function Card({ data }: { data: movie }) {
   const poster = "https://image.tmdb.org/t/p/w500" + data.poster_path
   const rate = data.vote_average.toFixed(1);
  
-  const { open, setValue } = useOpen();
  
-  const hundleClick = () => {
-    setValue({ media_type: data.media_type, id: data.id });
-    open();
-  }
+  
  
   const { isFavorite, toggleFavorite } = useFavorites()
  
   return (
+    <Link to={`/details/${data.media_type}/${data.id}`} >
     <div
       className="flex flex-col items-center mx-5 mb-12 transition sm:hover:scale-110"
       id={String(data.id)}
-      onClick={hundleClick}
     >
       {/* الصورة */}
       <div
@@ -36,11 +31,11 @@ export default function Card({ data }: { data: movie }) {
         <div
           onClick={(e) => {
             e.stopPropagation();
-            toggleFavorite({ id: data.id, media_type: data.media_type });
+            toggleFavorite({ id: String(data.id), media_type: data.media_type });
           }}
           className="m-1"
         >
-          {isFavorite(data.id) ? <FavoriteIcon className="text-accent-red" /> : <FavoriteBorderIcon />}
+          {isFavorite(String(data.id)) ? <FavoriteIcon className="text-accent-red" /> : <FavoriteBorderIcon />}
         </div>
       </div>
  
@@ -59,5 +54,6 @@ export default function Card({ data }: { data: movie }) {
         </div>
       </div>
     </div>
+    </Link>
   )
 }
