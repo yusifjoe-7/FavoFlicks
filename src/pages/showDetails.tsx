@@ -29,7 +29,9 @@ export default function ShowDetails() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!id || !media_type) return  // ✅ الشرط جوه الـ useEffect مش بره
+    if (!id || !media_type) return// ✅ الشرط جوه الـ useEffect مش بره
+
+     // ✅ نزل الصفحة لفوق لما يفتح التفاصيل
 
     const fetchMovies = async () => {
       const [movies, castData, sim] = await Promise.all([
@@ -37,14 +39,21 @@ export default function ShowDetails() {
         getCast(media_type, id),
         getSemMovies(media_type, id)
       ])
+      window.scrollTo(0, 0);
       setMovieDetails(movies)
       setCast(castData)
       setSemelarMovies(sim)
-      
+      setLoading(false)
     }
-setLoading(false)
+
     fetchMovies()
   }, [id, media_type])
+
+  useEffect(() => {
+    if (movieDetails) {
+      window.scrollTo(0, 0)   // ✅ بيتنفذ بعد ما الصفحة تتعرض فعلاً
+    }
+}, [movieDetails])
 
   // ✅ كل الـ returns بعد الـ hooks
   if (loading) return <div className="h-screen flex items-center justify-center">Loading...</div>
@@ -73,8 +82,8 @@ setLoading(false)
 
       <div className="relative mx-auto w-full bg-card  flex flex-col items-center">
 
-             <Link to= {"/"}><HomeIcon className="text-4xl text-amber-50 cursor-pointer absolute top-[2%] left-[5%]" /> </Link>
-            <ArrowBackIcon className="text-4xl text-amber-50 cursor-pointer absolute top-[2%] right-[5%]" onClick={()=>navigate(-1)} /> 
+             <Link to= {"/"}><HomeIcon className="text-4xl text-text cursor-pointer absolute top-[2%] left-[5%] z-80" /> </Link>
+            <ArrowBackIcon className="text-4xl text-text cursor-pointer absolute top-[2%] right-[5%] z-80" onClick={()=>navigate(-1)} /> 
          
         <div className="w-full h-60 bg-cover bg-contain bg-auto bg-center opacity-50 sticky"
           style={{ backgroundImage: `url(${backdrop})` }}></div>
