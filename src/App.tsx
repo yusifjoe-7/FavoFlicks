@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import { useMatch } from "react-router-dom"
 
 import Nav from "./components/nav"
@@ -11,7 +11,7 @@ import ShowDetails from "./pages/showDetails"
 
 function App() {
   const matchDetails = useMatch("/details/:media_type/:id")
-  const hideNav = !!matchDetails  // true لو الـ URL يطابق الباترن
+  const hideNav = !!matchDetails 
 
   return (
     <div className="text-text bg-bg">
