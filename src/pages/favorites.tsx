@@ -8,7 +8,6 @@ export default function Favorites() {
   const { favorites } = useFavorites();
   const [movies, setMovies] = useState<movie[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const limit = 10;
 const endRef= useRef<HTMLDivElement | null>(null);
