@@ -36,6 +36,10 @@ export default function ShowDetails() {
 
   window.scrollTo(0, 0);
   setLoading(true)
+    setMovieDetails(undefined); // ✅ امسح الداتا القديمة
+  setCast([]);
+  setSemelarMovies([]);
+
 
   const fetchMovies = async () => {
     try {
