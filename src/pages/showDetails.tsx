@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import type { movieDetails,cast, movie } from "../types/types";
 import { getDetails,getCast, getSemMovies } from "../API/moviesDetailsAPI";
-import {useNavigate, useParams } from "react-router-dom";
+import {Navigate, useNavigate, useParams } from "react-router-dom";
 import { useFavorites } from "../hooks/favoriteContext";
 import { Link } from "react-router-dom";
 import FavoriteBut from "../components/favoriteBut";
@@ -9,9 +9,11 @@ import AddtofavBut from "../components/addtofavBut";
 import SideScroll from "../components/sideScroll";
 import CastCard from "../components/castCard";
 import Card from "../components/card";
+import LoadingPage from "./LoadingPage";
 
  import HomeIcon from '@mui/icons-material/Home';
  import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 
 
 
@@ -22,43 +24,48 @@ export default function ShowDetails() {
   const [cast, setCast] = useState<cast[]>([])
   const [semelarMovies, setSemelarMovies] = useState<movie[]>([])
   const [loading, setLoading] = useState(true)
+  const [hasError, setHasError] = useState(false);
 
   // ✅ كل الـ hooks فوق أي return
   const { id, media_type } = useParams<{ id: string; media_type: "tv" | "movie" }>()
   const { isFavorite, toggleFavorite } = useFavorites()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (!id || !media_type) return// ✅ الشرط جوه الـ useEffect مش بره
+ useEffect(() => {
+  if (!id || !media_type) return;
 
-     // ✅ نزل الصفحة لفوق لما يفتح التفاصيل
+  window.scrollTo(0, 0); // ✅ هنا بس، قبل ما تجيب الداتا
 
-    const fetchMovies = async () => {
+  const fetchMovies = async () => {
+    try {
       const [movies, castData, sim] = await Promise.all([
         getDetails(media_type, id),
         getCast(media_type, id),
-        getSemMovies(media_type, id)
-      ])
-      window.scrollTo(0, 0);
-      setMovieDetails(movies)
-      setCast(castData)
-      setSemelarMovies(sim)
-      setLoading(false)
-    }
+        getSemMovies(media_type, id),
+      ]);
+      if (!movies.ok) throw new Error("Failed to fetch movie details");
 
-    fetchMovies()
-  }, [id, media_type])
-
-  useEffect(() => {
-    if (movieDetails) {
-      window.scrollTo(0, 0)   // ✅ بيتنفذ بعد ما الصفحة تتعرض فعلاً
+      setMovieDetails(movies);
+      setCast(castData);
+      setSemelarMovies(sim);
+      setLoading(false);
+    } catch (err) {
+      console.error(err);
+  setHasError(true);
+  setLoading(false);
+  navigate("/not-found");
     }
-}, [movieDetails])
+  };
+
+  fetchMovies();
+}, [id, media_type]);
 
   // ✅ كل الـ returns بعد الـ hooks
-  if (loading) return <div className="h-screen flex items-center justify-center">Loading...</div>
-  if (!id || !media_type) return <div>Not Found</div>
-  if (!movieDetails) return <div className="h-screen flex items-center justify-center">Loading...</div>
+if (loading) return <LoadingPage />
+if (hasError) return <Navigate to="/not-found" replace />
+
+if (!id || !media_type) return <div>not found</div>
+if (!movieDetails) return null
 
   const backdrop = "https://image.tmdb.org/t/p/w500" + movieDetails.backdrop_path
   const poster = "https://image.tmdb.org/t/p/w500" + movieDetails.poster_path

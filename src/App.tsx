@@ -8,6 +8,7 @@ import Discover from "./pages/discover"
 import NotFound from "./pages/notFound"
 import Search from "./pages/search"
 import ShowDetails from "./pages/showDetails"
+import FoundError from "./pages/FoundError"
 
 function App() {
   const matchDetails = useMatch("/details/:media_type/:id")
@@ -22,6 +23,7 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/search" element={<Search />} />
         <Route path="/details/:media_type/:id" element={<ShowDetails />} />
+        <Route path="/not-found" element={<FoundError />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
