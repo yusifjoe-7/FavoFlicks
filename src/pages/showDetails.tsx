@@ -34,7 +34,8 @@ export default function ShowDetails() {
  useEffect(() => {
   if (!id || !media_type) return;
 
-  window.scrollTo(0, 0); // ✅ هنا بس، قبل ما تجيب الداتا
+  window.scrollTo(0, 0);
+  setLoading(true)
 
   const fetchMovies = async () => {
     try {
@@ -43,7 +44,7 @@ export default function ShowDetails() {
         getCast(media_type, id),
         getSemMovies(media_type, id),
       ]);
-      if (!movies.ok) throw new Error("Failed to fetch movie details");
+      if (!movies) throw new Error("Failed to fetch movie details");
 
       setMovieDetails(movies);
       setCast(castData);
