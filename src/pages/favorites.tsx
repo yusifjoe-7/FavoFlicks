@@ -103,7 +103,7 @@ const handleScroll = useCallback(() => {
           <p className="text-muted">No favorites yet. Start adding some! ❤️</p>
         )}
         {!loading && frLoading && movies.length >= 0 && (
-          <p className="text-muted">loading...</p>
+          <img src={"/favoflicks_star.svg"} alt="loading suv" className="suv-around w-5 -translate-y-25" />
         )}
         {/* ✅ الـ cards دايماً موجودة في الـ DOM */}
         <div className="sm:w-[90%] w-full flex justify-center gap-5 flex-wrap items-center slideFade mb-30">
