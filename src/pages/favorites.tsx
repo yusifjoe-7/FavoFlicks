@@ -7,34 +7,41 @@ import Card from "../components/card";
 export default function Favorites() {
   const { favorites } = useFavorites();
   const [movies, setMovies] = useState<movie[]>([]);
+
+  const [frLoading, setFrLoading] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
+  
+  const [page, setPage] = useState<number>(1);
   const limit = 10;
 const endRef= useRef<HTMLDivElement | null>(null);
 const [hasMore, setHasMore] = useState<boolean>(true);
+const isFr = ()=> {if (page===1) return true; else return false}
 
 
     const handleScroll = () => {
       
-    if(window.innerHeight+ document.documentElement.scrollTop + window.innerHeight/2 + 100 >= document.documentElement.offsetHeight && !loading && hasMore){
+    if(window.innerHeight+ document.documentElement.scrollTop + 50 >= document.documentElement.offsetHeight && !loading && hasMore){
       
       setPage((prev) => prev + 1);
     }
   }
   useEffect(() => {
+    window.scrollTo(0, 0);
     window.addEventListener("scroll", handleScroll);
   }, []);
  
 
   useEffect(() => {
+    
     const fetchFavorites = async () => {
-      setLoading(true);
+      isFr()? setFrLoading(true) : setLoading(true);
 
       const favoritesToFetch = favorites.slice((page - 1) * limit, page * limit);
 
       if (favoritesToFetch.length === 0) {
       setHasMore(false);
       setLoading(false);
+      setFrLoading(false);
       return;
     }
 
@@ -53,6 +60,7 @@ const [hasMore, setHasMore] = useState<boolean>(true);
 
       setMovies((prev) => [...prev, ...moviesWithType]);
     setLoading(false);
+    setFrLoading(false);
     };
 
     if (favorites.length > 0) {
@@ -60,6 +68,7 @@ const [hasMore, setHasMore] = useState<boolean>(true);
     } else {
       setMovies([]);
       setLoading(false);
+      setFrLoading(false);
     }
   }, [favorites, page]);
 
@@ -68,27 +77,27 @@ const [hasMore, setHasMore] = useState<boolean>(true);
         <h1 className="text-accent text-4xl curseve">My Favorites</h1>
 
         {/* ✅ حالة مفيش favorites خالص */}
-        {!loading && movies.length === 0 && (
+        {!loading && !frLoading && movies.length === 0 && (
           <p className="text-muted">No favorites yet. Start adding some! ❤️</p>
         )}
-
+        {!loading && frLoading && movies.length >= 0 && (
+          <p className="text-muted">loading...</p>
+        )}
         {/* ✅ الـ cards دايماً موجودة في الـ DOM */}
         <div className="sm:w-[90%] w-full flex justify-center gap-5 flex-wrap items-center slideFade mb-30">
           {movies.map((m: movie) => (
             <Card key={m.id} data={m} />
           ))}
         </div>
+        {loading && <img src={"/favoflicks_star.svg"} alt="loading suv" className="suv-around w-5 -translate-y-25" />}
 
         {/* ✅ endRef دايماً موجود في الـ DOM */}
         <div ref={endRef} className="h-2 w-full" />
 
         {/* ✅ Spinner تحت الـ cards */}
-        {loading && <p className="text-muted">Loading...</p>}
+        
 
-        {/* ✅ رسالة لو خلصت الداتا */}
-        {!hasMore && movies.length > 0 && (
-          <p className="text-center text-gray-400 py-4">لا يوجد المزيد ✅</p>
-        )}
+      
       </div>
     </div>
   );

@@ -108,3 +108,20 @@
     transform: translateY(-20px);
   }
 }
+
+.suv-around{
+  animation: around 1s infinite ease-in-out;
+}
+
+@keyframes around {
+  0% {
+    transform:  translateX(50px);
+  }
+  50% {
+    transform: translateX(-50px);
+  }
+  
+ 100% {
+    transform: translateX(50px);
+  }
+}
