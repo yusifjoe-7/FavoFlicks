@@ -28,7 +28,7 @@ export default function Card({ data }: { data: movie }) {
     >
       {/* الصورة */}
       <div
-        className="sm:w-33 w-20 aspect-2/3 rounded-xl shadow-2xl bg-cover bg-contain bg-auto z-30 bg-gray-500"
+        className="sm:w-33 w-22 aspect-2/3 rounded-xl shadow-2xl bg-cover bg-contain bg-auto z-30 bg-gray-500"
         style={{ backgroundImage: `url(${poster})` }}
       >
         <div
@@ -43,7 +43,7 @@ export default function Card({ data }: { data: movie }) {
       </div>
  
       {/* المعلومات */}
-      <div className="sm:w-37 w-24 sm:aspect-3/4 h-50 bg-card border-2 border-t-0 border-accent -mt-25 rounded-2xl">
+      <div className="sm:w-37 w-28 sm:aspect-3/4 h-50 bg-card border-2 border-t-0 border-accent -mt-25 rounded-2xl">
         <div className="flex justify-center items-center gap-3 pt-30 w-full text-sm flex-col overflow-hidden">
           <div className="w-[90%] h-full flex flex-col items-center justify-center pb-3 sm:pb-5">
             <h1 className="sm:pb-2 p-1 pt-0 sm:text-sm text-[11px] line-clamp-2 card-title">{title}</h1>

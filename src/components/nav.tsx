@@ -72,7 +72,9 @@ useEffect(() => {
                 <div className="flex flex-col items-center gap-5 md:hidden pb-4 fixed w-full bg-bg">
                     <Link to={"/"} onClick={() => setOpened(false)} className="hover:text-accent transition">Home</Link>
                     <Link to={"/discover"} onClick={() => setOpened(false)} className="hover:text-accent transition">Discover</Link>
+                    <Link to={"/search"} onClick={() => setOpened(false)} className="hover:text-accent transition">Search</Link>
                     <Link to={"/favorites"} onClick={() => setOpened(false)} className="hover:text-accent transition">Favorites</Link>
+
                 </div>
             }
         </nav>

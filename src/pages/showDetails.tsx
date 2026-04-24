@@ -13,6 +13,8 @@ import LoadingPage from "./LoadingPage";
 
  import HomeIcon from '@mui/icons-material/Home';
  import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Helmet} from "react-helmet-async";
+
 
 
 
@@ -87,9 +89,14 @@ if (!movieDetails) return null
     return `${hours}h ${mins}m`
   }
 
-  return (
+  return (<>
     
-
+      <Helmet>
+        <title>{title}</title>
+        <meta property="og:title" content={`${title}`} />
+        <meta property="og:description" content={movieDetails.overview} />
+        <meta property="og:image" content={poster} />
+      </Helmet>
      
 
       <div className=" w-full bg-bg  flex flex-col items-center">
@@ -138,6 +145,6 @@ if (!movieDetails) return null
         </div>
 
       </div>
-    
+    </>
   )
 }

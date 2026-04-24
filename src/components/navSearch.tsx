@@ -17,7 +17,7 @@ export default function NavSearch() {
   }
 
   return (
-    <div className="sm:w-64 w-27">
+    <div className="w-64 sm:block hidden">
   <TextField
   value={inputValue}
   onChange={(e:React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
