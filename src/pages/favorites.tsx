@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import type { movie } from "../types/types";
 import { useFavorites } from "../hooks/favoriteContext";
 import { getDetails } from "../API/moviesDetailsAPI";
@@ -15,16 +15,34 @@ export default function Favorites() {
   const limit = 10;
 const endRef= useRef<HTMLDivElement | null>(null);
 const [hasMore, setHasMore] = useState<boolean>(true);
-const isFr = ()=> {if (page===1) return true; else return false}
 
+const loadingRef = useRef(false);
+const hasMoreRef = useRef(true);
 
-    const handleScroll = () => {
-      
-    if(window.innerHeight+ document.documentElement.scrollTop + 50 >= document.documentElement.offsetHeight && !loading && hasMore){
-      
-      setPage((prev) => prev + 1);
-    }
+const prevFavoritesRef = useRef(favorites);
+
+useEffect(() => {
+  if (prevFavoritesRef.current !== favorites) {
+    prevFavoritesRef.current = favorites;
+    setPage(1); // هيـ trigger الـ useEffect بتاع الفيتش
   }
+}, [favorites]);
+
+
+useEffect(() => { loadingRef.current = loading; }, [loading]);
+useEffect(() => { hasMoreRef.current = hasMore; }, [hasMore]);
+
+const handleScroll = useCallback(() => {
+  if (
+    window.innerHeight + document.documentElement.scrollTop + 50 >=
+      document.documentElement.offsetHeight &&
+    !loadingRef.current &&
+    hasMoreRef.current
+  ) {
+    setPage((prev) => prev + 1);
+  }
+}, []);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     window.addEventListener("scroll", handleScroll);
@@ -32,45 +50,49 @@ const isFr = ()=> {if (page===1) return true; else return false}
  
 
   useEffect(() => {
-    
-    const fetchFavorites = async () => {
-      isFr()? setFrLoading(true) : setLoading(true);
+  const fetchFavorites = async () => {
+    page === 1 ? setFrLoading(true) : setLoading(true);
 
-      const favoritesToFetch = favorites.slice((page - 1) * limit, page * limit);
+    const favoritesToFetch = favorites.slice((page - 1) * limit, page * limit);
 
-      if (favoritesToFetch.length === 0) {
+    if (favoritesToFetch.length === 0) {
       setHasMore(false);
       setLoading(false);
       setFrLoading(false);
+      // ✅ امسح الـ movies لو مفيش favorites خالص
+      if (page === 1) setMovies([]);
       return;
     }
 
-      // ✅ بنعمل API call لكل favorite عشان نجيب بياناته الكاملة
-      const results = await Promise.all(
-        favoritesToFetch.map((fav) =>
-          getDetails(fav.media_type, String(fav.id))
-        )
-      );
+    const results = await Promise.all(
+      favoritesToFetch.map((fav) => getDetails(fav.media_type, String(fav.id)))
+    );
 
-      // ✅ بنضيف media_type لكل نتيجة لأن الـ API مش بيرجعه
-      const moviesWithType: movie[] = results.map((data, i) => ({
-        ...data,
-        media_type: favoritesToFetch[i].media_type,
-      }));
+    const moviesResults: movie[] = results.map((data, i) => ({
+      ...data,
+      media_type: favoritesToFetch[i].media_type,
+    }));
 
-      setMovies((prev) => [...prev, ...moviesWithType]);
+    // ✅ لو page === 1 يعني favorites اتغير أو أول load، استبدل الكل
+    if (page === 1) {
+      setMovies(moviesResults);
+    } else {
+      setMovies((prev) => [...prev, ...moviesResults]);
+    }
+
+    setHasMore(favoritesToFetch.length === limit);
     setLoading(false);
     setFrLoading(false);
-    };
+  };
 
-    if (favorites.length > 0) {
-      fetchFavorites();
-    } else {
-      setMovies([]);
-      setLoading(false);
-      setFrLoading(false);
-    }
-  }, [favorites, page]);
+  if (favorites.length > 0) {
+    fetchFavorites();
+  } else {
+    setMovies([]);
+    setLoading(false);
+    setFrLoading(false);
+  }
+}, [page, favorites]);
 
   return (<div className="relative min-h-screen bg-bg flex justify-center overflow-hidden">
       <div className="relative z-10 flex flex-col items-center top-20 gap-20 slideFade w-full">
@@ -94,7 +116,7 @@ const isFr = ()=> {if (page===1) return true; else return false}
         {/* ✅ endRef دايماً موجود في الـ DOM */}
         <div ref={endRef} className="h-2 w-full" />
 
-        {/* ✅ Spinner تحت الـ cards */}
+        
         
 
       
