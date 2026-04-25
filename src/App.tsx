@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom"
 import { useMatch } from "react-router-dom"
-import { useLocation } from "react-router-dom"
 import { useScreenSize } from "./hooks/screenSizeHook"
 
 import Nav from "./components/nav"
@@ -15,12 +14,11 @@ import BottomNav from "./components/BottomNav"
 
 function App() {
   const matchDetails = useMatch("/details/:media_type/:id")
-  const location = useLocation();
   const hideNav = !!matchDetails 
   const width = useScreenSize();
   
 
-  const isApp:boolean = location.pathname.startsWith("/app");
+ const isApp = window.matchMedia('(display-mode: standalone)').matches;
   const isMobile = width <= 768;
 
 

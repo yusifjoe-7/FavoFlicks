@@ -34,7 +34,7 @@ useEffect(() => {
 
     return (
         <nav className={`bg-bg sticky top-0 z-40 transition-transform duration-300 border-b border-bg ${visible ? "translate-y-0" : "-translate-y-full"}`}>
-            <div className="bg-bg flex justify-between items-center py-3 px-2 sm:px-10 md:px-15">
+            <div className="bg-bg flex justify-between items-center py-3 px-7 sm:px-10 md:px-15">
                 <Link to={"/"}>
   <div className="flex items-center gap-2 group cursor-pointer">
     {/* Star icon */}
