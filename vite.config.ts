@@ -12,7 +12,7 @@ export default defineConfig({
       manifest: {
         name: 'FavoFlicks films',
         short_name: 'FavoFlicks',
-        theme_color: '#6366F1',
+        theme_color: '#221A47',
         background_color: '#0F1115',
         display: 'standalone',
         "icons": [
