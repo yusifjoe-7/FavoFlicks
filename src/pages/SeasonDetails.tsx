@@ -25,19 +25,22 @@ if (media_type !== "tv" && media_type !== "movie") {
  fatch()
     }, [])
   return (
-    <div className="min-h-screen bg-bg flex flex-col justify-center overflow-hidden box-border px-5">
-        <div className="absolute sm:top-[7%] top-[5%] sm:left-[7%] left-[9%]  ">
+    <div className="min-h-screen bg-bg flex flex-col justify-center overflow-hidden box-border px-5 overflow-x-hidden">
+        <div className="w-full flex justify-center mt-11 z-50 ">
+          <div className="w-[90%] flex justify-between items-center">
+            <div className="flex items-center">
             <Link to= {"/"}><HomeIcon sx={{width:{sm: "40px", xs: "18px"
-                        }}} className="sm:text-4xl text:sm text-text cursor-pointer z-80 mr-2" /> </Link>
+                        }}} className="sm:text-4xl text:sm text-text cursor-pointer z-80  " /> </Link>
             <MovieIcon sx={{width:{sm: "40px", xs: "18px"
-                        }}} className="sm:text-4xl text:sm text-text cursor-pointer absolute z-80 ml-2" onClick={()=>navigate(`/details/${media_type}/${id}`)} />
+                        }}} className="sm:text-4xl text:sm text-text cursor-pointer absolute z-80 sm:ml-17 ml-10" onClick={()=>navigate(`/details/${media_type}/${id}`)} />
         </div>
                     
                         <ArrowBackIcon sx={{width:{sm: "40px", xs: "20px"
-                        }}} className="sm:text-4xl text:xs text-text cursor-pointer absolute sm:top-[7%] top-[5%] sm:right-[7%] right-[9%] z-80" onClick={()=>navigate(-1)} /> 
+                        }}} className="sm:text-4xl text:xs text-text cursor-pointer z-80" onClick={()=>navigate(-1)} /></div> 
 
+        </div>
                     
-      <div className="flex flex-col items-center mt-20 sm:px-10 px-4 ">
+      <div className="flex flex-col items-center mt-9 sm:px-10 px-4 ">
         <h2 className="sm:text-3xl text-xl "> {season?.name}</h2>
         <h4 className="mt-2 mb-5 text sm:text-sm text-xs text-muted">{season?.air_date}</h4>
         <p className="font-serif sm:text-sm text-xs">{season?.overview}</p>
