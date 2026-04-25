@@ -5,7 +5,7 @@ import NavSearch from "./navSearch";
 
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-
+//----
 export default function Nav() {
     const [opened, setOpened] = useState<boolean>(false);
     const [visible, setVisible] = useState<boolean>(true);
