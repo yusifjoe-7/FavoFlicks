@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 function BottomNav() {
   return (
-    <div className="w-full h-14 bg-card rounded-t-2xl flex box-border justify-between items-center px-10 fixed -bottom-2 opacity-90 z-200">
+    <div className="w-full h-14 bg-card rounded-t-2xl flex box-border justify-between items-center px-10 fixed -bottom-2 opacity-95 z-200 sm:hidden">
       <NavLink to={'/'}>
       {({ isActive }) => (
 

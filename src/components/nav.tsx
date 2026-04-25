@@ -33,7 +33,7 @@ useEffect(() => {
 }, []); // ✅ بيتعمل مرة واحدة بس
 
     return (
-        <nav className={`bg-bg sticky top-0 z-40 transition-transform duration-300 border-b border-bg ${visible ? "translate-y-0" : "-translate-y-full"}`}>
+        <nav className={`bg-bg sticky top-0 z-40 transition-transform duration-300 border-b border-bg ${visible ? "translate-y-0" : "-translate-y-full"} sm:block hidden`}>
             <div className="bg-bg flex justify-between items-center py-3 px-7 sm:px-10 md:px-15">
                 <Link to={"/"}>
   <div className="flex items-center gap-2 group cursor-pointer">
@@ -72,7 +72,7 @@ useEffect(() => {
                 <div className="flex flex-col items-center gap-5 md:hidden pb-4 fixed w-full bg-bg">
                     <Link to={"/"} onClick={() => setOpened(false)} className="hover:text-accent transition">Home</Link>
                     <Link to={"/discover"} onClick={() => setOpened(false)} className="hover:text-accent transition">Discover</Link>
-                    <Link to={"/search"} onClick={() => setOpened(false)} className="hover:text-accent transition">Search</Link>
+                    
                     <Link to={"/favorites"} onClick={() => setOpened(false)} className="hover:text-accent transition">Favorites</Link>
 
                 </div>

@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom"
 import { useMatch } from "react-router-dom"
-import { useScreenSize } from "./hooks/screenSizeHook"
 
 import Nav from "./components/nav"
 import Home from "./pages/home"
@@ -15,16 +14,12 @@ import BottomNav from "./components/BottomNav"
 function App() {
   const matchDetails = useMatch("/details/:media_type/:id")
   const hideNav = !!matchDetails 
-  const width = useScreenSize();
-  
 
- const isApp = window.matchMedia('(display-mode: standalone)').matches;
-  const isMobile = width <= 768;
 
 
   return (
     <div className="text-text bg-bg w-full overflow-x-hidden">
-      {!hideNav && (!isApp || !isMobile) && <Nav />}
+      {!hideNav&& <Nav />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/discover" element={<Discover />} />
@@ -34,7 +29,7 @@ function App() {
         <Route path="/not-found" element={<FoundError />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {!hideNav && isApp && isMobile && <BottomNav />}
+      {!hideNav && <BottomNav />}
     </div>
   )
 }
