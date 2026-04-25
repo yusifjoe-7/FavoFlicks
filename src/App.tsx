@@ -10,10 +10,12 @@ import Search from "./pages/search"
 import ShowDetails from "./pages/showDetails"
 import FoundError from "./pages/FoundError"
 import BottomNav from "./components/BottomNav"
+import SeasonDetails from "./pages/SeasonDetails"
 
 function App() {
   const matchDetails = useMatch("/details/:media_type/:id")
-  const hideNav = !!matchDetails 
+  const matchSeasonDetails = useMatch("/details/:media_type/:id/season/:season_number")
+  const hideNav = !!matchDetails || !!matchSeasonDetails
 
 
 
@@ -26,6 +28,7 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/search" element={<Search/>} />
         <Route path="/details/:media_type/:id" element={<ShowDetails />} />
+        <Route path="/details/:media_type/:id/season/:season_number" element={<SeasonDetails />} />
         <Route path="/not-found" element={<FoundError />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

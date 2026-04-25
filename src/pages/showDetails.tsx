@@ -14,6 +14,7 @@ import LoadingPage from "./LoadingPage";
  import HomeIcon from '@mui/icons-material/Home';
  import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Helmet} from "react-helmet-async";
+import Seasons from "../components/Seasons";
 
 
 
@@ -88,7 +89,7 @@ if (!movieDetails) return null
     if (hours === 0) return `${mins}m`
     return `${hours}h ${mins}m`
   }
-
+console.log(movieDetails)
   return (<>
     
       <Helmet>
@@ -131,12 +132,20 @@ if (!movieDetails) return null
             <p className="text-muted text-xs">{movieDetails.overview}</p>
           </div>
         <div className="py-3">{rate !== '0.0'? <span>rate: {rate}⭐</span> :null}</div>
+
+        
+
         <div className="block sm:hidden" onClick={()=>toggleFavorite({ id: id, media_type:media_type })}>
                 {fav() ? <FavoriteBut/>: <AddtofavBut/>}
               </div>
+              <div className="mb-7">
               <SideScroll>
                   {cast?.map((m: cast) => <CastCard key={m.id} data={m} />)}
               </SideScroll>
+              </div>
+
+              {media_type === 'tv' && <Seasons seasons={movieDetails.seasons} id={id} media_type={media_type} />}
+
               <div className="mt-10">
                 <SideScroll >
                 {semelarMovies?.map((m: movie) => <Card key={m.id} data={m} />) }

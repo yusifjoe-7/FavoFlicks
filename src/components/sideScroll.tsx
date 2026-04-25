@@ -8,12 +8,14 @@ export default function SideScroll({ children }: { children: ReactNode }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(true);
+  const isShort = useRef(false);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
 
     const handleScroll = () => {
+      isShort.current = el.scrollWidth <= el.clientWidth;
       setShowLeft(el.scrollLeft > 0);
       setShowRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
     };
@@ -51,7 +53,9 @@ export default function SideScroll({ children }: { children: ReactNode }) {
       />
 
       <div
-        className="flex items-top overflow-x-auto scroll-smooth scrollbar-hide my-auto py-4 w-full"
+        className={`flex items-top overflow-x-auto scroll-smooth scrollbar-hide my-auto py-4 w-full
+        ${isShort.current ? "justify-center" : ""}
+        `}
         ref={scrollRef}
       >
         {children}

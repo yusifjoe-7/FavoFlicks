@@ -57,3 +57,4 @@ export const getSemMovies = async (type: string | 'tv', id:string) => {
     return [];
   }
 };
+
