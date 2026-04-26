@@ -4,7 +4,7 @@ import YouTube from "react-youtube";
 
 export function VideoPlayer( {id}: {id: string} ) {
   return (
-    <div className="sm:w-[60%] w-[90%] aspect-video mx-auto my-10">
+    <div className="sm:w-[60%] w-full aspect-video mx-auto my-10">
         <YouTube
       videoId={id}
       className="w-full h-full"

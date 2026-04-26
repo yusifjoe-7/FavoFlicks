@@ -16,7 +16,7 @@ const Seasons = ( { seasons, id, media_type }: props ) => {
     
 
   return (
-    <div className='mb-7 mt-3 w-full flex flex-wrap'>
+    <div className='my-10 w-full flex flex-wrap'>
         <SideScroll>
       {seasons.map((season) => (
         <Link to={`/details/${media_type}/${id}/season/${season.season_number}`} key={season.id}>

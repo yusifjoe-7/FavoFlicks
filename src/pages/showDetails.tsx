@@ -151,7 +151,7 @@ if (!movieDetails) return null
         <div className="block sm:hidden" onClick={()=>toggleFavorite({ id: id, media_type:media_type })}>
                 {fav() ? <FavoriteBut/>: <AddtofavBut/>}
               </div>
-              <div className="mb-7">
+              <div className="my-5">
               <SideScroll>
                   {cast?.map((m: cast) => <CastCard key={m.id} data={m} />)}
               </SideScroll>
@@ -161,7 +161,7 @@ if (!movieDetails) return null
 
               {media_type === 'tv' && <Seasons seasons={movieDetails.seasons} id={id} media_type={media_type} />}
 
-              <div className="mt-10">
+              <div className={`my-5 ${media_type === 'movie' ? 'mt-17' : ''}`}>
                 <SideScroll >
                 {semelarMovies?.map((m: movie) => <Card key={m.id} data={m} />) }
               </SideScroll>
