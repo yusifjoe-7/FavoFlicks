@@ -36,11 +36,11 @@ if (media_type !== "tv" && media_type !== "movie") {
   fetchSeason();
 }, [media_type, id, season_number, navigate]);
   return (
-    <div className="min-h-screen bg-bg flex flex-col justify-center overflow-hidden box-border px-5 overflow-x-hidden">
+    <div className="min-h-screen relative bg-bg flex flex-col justify-center overflow-hidden box-border px-5 overflow-x-hidden">
 
     
 
-      <div className={`w-full flex justify-center mt-11 z-50 ${loading ? "hidden" : ""}`}>
+      <div className="w-full flex justify-center mt-11 z-50 absolute top-1 sm:pr-15 pr-10">
           <div className="w-[90%] flex justify-between items-center">
             <div className="flex items-center">
             <Link to= {"/"}><HomeIcon sx={{width:{sm: "40px", xs: "18px"
@@ -54,7 +54,7 @@ if (media_type !== "tv" && media_type !== "movie") {
 
         </div>
                     
-      <div className="flex flex-col items-center mt-9 sm:px-10 px-4 ">
+      <div className="flex flex-col items-center mt-25 sm:px-10 px-4 ">
         {loading &&  <img src={"/favoflicks_star.svg"} alt="loading suv" className="suv-around w-5 mx-2" />
         }
         <h2 className="sm:text-3xl text-xl "> {season?.name}</h2>
