@@ -1,6 +1,7 @@
 import SideScroll from './sideScroll';
 import type { seasons } from '../types/types';
-import { Link } from 'react-router-dom';
+import { Link  } from 'react-router-dom';
+
 
 type props ={
     seasons: seasons[],
@@ -12,6 +13,7 @@ type props ={
 const posterMainn = "https://image.tmdb.org/t/p/w500"
 const Seasons = ( { seasons, id, media_type }: props ) => {
 
+    
 
   return (
     <div className='mb-7 w-full flex flex-wrap'>

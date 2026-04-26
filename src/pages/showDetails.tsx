@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import type { movieDetails,cast, movie } from "../types/types";
-import { getDetails,getCast, getSemMovies } from "../API/moviesDetailsAPI";
+import { getDetails,getCast, getSemMovies, getTrailer } from "../API/moviesDetailsAPI";
 import {Navigate, useNavigate, useParams } from "react-router-dom";
 import { useFavorites } from "../hooks/favoriteContext";
 import { Link } from "react-router-dom";
@@ -15,6 +15,7 @@ import LoadingPage from "./LoadingPage";
  import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Helmet} from "react-helmet-async";
 import Seasons from "../components/Seasons";
+import { VideoPlayer } from "../components/vadio";
 
 
 
@@ -26,6 +27,7 @@ export default function ShowDetails() {
     const [movieDetails, setMovieDetails] = useState<movieDetails>()
   const [cast, setCast] = useState<cast[]>([])
   const [semelarMovies, setSemelarMovies] = useState<movie[]>([])
+  const [vadios, setVadios] = useState<any>()
   const [loading, setLoading] = useState(true)
   const [hasError, setHasError] = useState(false);
 
@@ -46,17 +48,22 @@ export default function ShowDetails() {
 
   const fetchMovies = async () => {
     try {
-      const [movies, castData, sim] = await Promise.all([
+      const [movies, castData, sim, vad] = await Promise.all([
         getDetails(media_type, id),
         getCast(media_type, id),
         getSemMovies(media_type, id),
+        getTrailer(media_type, id)
       ]);
       if (!movies) throw new Error("Failed to fetch movie details");
 
       setMovieDetails(movies);
       setCast(castData);
       setSemelarMovies(sim);
+      setVadios(vad);
       setLoading(false);
+    
+      
+
     } catch (err) {
       console.error(err);
   setHasError(true);
@@ -67,6 +74,8 @@ export default function ShowDetails() {
 
   fetchMovies();
 }, [id, media_type]);
+
+console.log(vadios)
 
   // ✅ كل الـ returns بعد الـ hooks
 if (loading) return <LoadingPage />
@@ -89,7 +98,11 @@ if (!movieDetails) return null
     if (hours === 0) return `${mins}m`
     return `${hours}h ${mins}m`
   }
-console.log(movieDetails)
+
+  const lastTrailerID = vadios[0]?.key;
+  console.log(lastTrailerID);
+
+
   return (<>
     
       <Helmet>
@@ -143,6 +156,8 @@ console.log(movieDetails)
                   {cast?.map((m: cast) => <CastCard key={m.id} data={m} />)}
               </SideScroll>
               </div>
+
+              {lastTrailerID && <VideoPlayer id={lastTrailerID} />}
 
               {media_type === 'tv' && <Seasons seasons={movieDetails.seasons} id={id} media_type={media_type} />}
 

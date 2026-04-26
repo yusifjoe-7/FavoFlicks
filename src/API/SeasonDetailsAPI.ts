@@ -1,8 +1,8 @@
 import axios from "axios";
 
+
 //from the .env
 const TOKEN = import.meta.env.VITE_TMDB_TOKEN
-
 
 
 export const getSeason = async (type: string | 'tv', id:string, season_number:string) => {
@@ -16,9 +16,12 @@ export const getSeason = async (type: string | 'tv', id:string, season_number:st
       },
     });
 
+    
+
     return response.data; 
   } catch (error) {
     console.error("Error fetching popular movies:", error);
+    
     return [];
   }
 };

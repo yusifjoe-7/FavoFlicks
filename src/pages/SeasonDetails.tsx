@@ -11,22 +11,36 @@ function SeasonDetails() {
      const navigate = useNavigate()
 
     const [season, setSeason] = useState<season | null>(null)
+    const [loading, setLoading] = useState<boolean>(true)
 
 if (media_type !== "tv" && media_type !== "movie") {
   return <Navigate to="/" /> // أو أي error handling
 }
     useEffect(() => {
-        const fatch =async() => {
-           const results:any = await getSeason(media_type, id!, season_number!)
-           setSeason(results)
-           console.log(results)
-        
-        }
- fatch()
-    }, [])
+  const fetchSeason = async () => {
+    try {
+      const results: any = await getSeason(media_type, id!, season_number!);
+      console.log(results);
+      if (!results) throw new Error("Failed to fetch movie details");
+      if (results.length === 0) throw new Error("Failed to fetch movie details");
+
+      setSeason(results);
+      setLoading(false);
+      console.log(results);
+    } catch (err) {
+      setLoading(false);
+      navigate("/not-found");
+    }
+  };
+
+  fetchSeason();
+}, [media_type, id, season_number, navigate]);
   return (
     <div className="min-h-screen bg-bg flex flex-col justify-center overflow-hidden box-border px-5 overflow-x-hidden">
-        <div className="w-full flex justify-center mt-11 z-50 ">
+
+    
+
+      <div className={`w-full flex justify-center mt-11 z-50 ${loading ? "hidden" : ""}`}>
           <div className="w-[90%] flex justify-between items-center">
             <div className="flex items-center">
             <Link to= {"/"}><HomeIcon sx={{width:{sm: "40px", xs: "18px"
@@ -41,6 +55,8 @@ if (media_type !== "tv" && media_type !== "movie") {
         </div>
                     
       <div className="flex flex-col items-center mt-9 sm:px-10 px-4 ">
+        {loading &&  <img src={"/favoflicks_star.svg"} alt="loading suv" className="suv-around w-5 mx-2" />
+        }
         <h2 className="sm:text-3xl text-xl "> {season?.name}</h2>
         <h4 className="mt-2 mb-5 text sm:text-sm text-xs text-muted">{season?.air_date}</h4>
         <p className="font-serif sm:text-sm text-xs">{season?.overview}</p>
