@@ -5,9 +5,9 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
  
  
-export default function Card({ data }: { data: movie }) {
+export default function Card({ data, index }: { data: movie, index?: "tv"|"movie" }) {
  
-  if(data.media_type === undefined){data.media_type = 'movie'}
+  if(data.media_type === undefined && index !== undefined){data.media_type = index}
   const title = data.title || data.name
   const poster = "https://image.tmdb.org/t/p/w500" + data.poster_path
   const rate = data.vote_average.toFixed(1);
