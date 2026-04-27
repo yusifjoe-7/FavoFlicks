@@ -163,7 +163,7 @@ if (!movieDetails) return null
 
               <div className={`my-5 ${media_type === 'movie' ? 'mt-17' : ''}`}>
                 <SideScroll >
-                {semelarMovies?.map((m: movie) => <Card key={m.id} data={m} />) }
+                {semelarMovies?.map((m: movie) => <Card key={m.id} data={m} index={media_type} />) }
               </SideScroll>
               </div>
         </div>
