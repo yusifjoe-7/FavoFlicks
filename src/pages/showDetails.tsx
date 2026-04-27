@@ -18,7 +18,7 @@ import Seasons from "../components/Seasons";
 import { VideoPlayer } from "../components/vadio";
 
 
-
+//----
 
 
 export default function ShowDetails() {
