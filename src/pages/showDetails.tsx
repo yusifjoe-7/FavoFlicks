@@ -101,7 +101,7 @@ if (!movieDetails) return null
 
     const handlePoster = ()=>{
     if(!isOpend){
-      setValue({cover: poster, size:"sm:w-[40%] w-[90%]", aspect:"aspect-2/3"});
+      setValue({cover: poster, size:"sm:w-[30%] w-[90%]", aspect:"aspect-2/3"});
       console.log(poster);
       open()
     }
