@@ -6,21 +6,32 @@ import type { movie } from "../types/types";
 import Head from "../components/head"
 import Card from "../components/card";
 import SkeletonCard from "../components/skeletonCard";
+import { useNavigate } from "react-router-dom";
  
 export default function Home() {
   const [movies, setMovies] = useState<movie[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
  
   useEffect(() => {
     const fetchMovies = async () => {
-      setLoading(true);
+      try{
+        setLoading(true);
       const [data, data2, data3] = await Promise.all([
         getPopularMovies(1),
         getPopularMovies(2),
         getPopularMovies(3),
       ]);
+      
+      if(!data || !data2 || !data3) throw new Error("Failed to fetch movies");
+
       setMovies([...data, ...data2, ...data3]);
       setLoading(false);
+
+      }catch(err){
+        setLoading(false);
+        navigate("/not-found");
+      }
     };
  
     fetchMovies();
