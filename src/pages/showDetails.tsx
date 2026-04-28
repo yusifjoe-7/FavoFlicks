@@ -16,12 +16,19 @@ import LoadingPage from "./LoadingPage";
 import { Helmet} from "react-helmet-async";
 import Seasons from "../components/Seasons";
 import { VideoPlayer } from "../components/vadio";
+import { usePhoto } from "../hooks/PhotoViewContext";
+import PhotoView from "../components/PhotoView";
 
 
 //----
 
 
 export default function ShowDetails() {
+
+  const {isOpend, open , setValue} = usePhoto();
+
+
+
 
 
     const [movieDetails, setMovieDetails] = useState<movieDetails>()
@@ -92,6 +99,21 @@ if (!movieDetails) return null
   const rate = movieDetails.vote_average.toFixed(1)
   const fav = () => isFavorite(id)
 
+    const handlePoster = ()=>{
+    if(!isOpend){
+      setValue({cover: poster, size:"sm:w-[40%] w-[90%]", aspect:"aspect-2/3"});
+      console.log(poster);
+      open()
+    }
+
+  }
+  const handelBackDrop = ()=>{
+    if(!isOpend){
+      setValue({cover: backdrop, size:"sm:w-[80%] w-[90%]", aspect:"aspect-16/9"});
+      open()
+    }
+  }
+
   function formatRuntime(minutes: number) {
     const hours = Math.floor(minutes / 60)
     const mins = minutes % 60
@@ -111,18 +133,20 @@ if (!movieDetails) return null
         <meta property="og:description" content={movieDetails.overview} />
         <meta property="og:image" content={poster} />
       </Helmet>
-     
+     {isOpend && <PhotoView/>}
 
-      <div className=" w-full bg-bg  flex flex-col items-center">
+      <div className=" w-full bg-bg min-h-screen flex flex-col items-center">
 
              <Link to= {"/"}><HomeIcon className="text-4xl text-text cursor-pointer absolute top-[3%] left-[5%] z-80" /> </Link>
             <ArrowBackIcon className="text-4xl text-text cursor-pointer absolute top-[3%] right-[5%] z-80" onClick={()=>navigate(-1)} /> 
          
-        <div className="w-full h-60 bg-cover bg-contain bg-auto bg-center opacity-50 sticky"
+        <div className="w-full h-60 cursor-pointer  bg-cover bg-contain bg-auto bg-center opacity-50 sticky"
+        onClick={()=>handelBackDrop()}
           style={{ backgroundImage: `url(${backdrop})` }}></div>
         <div className="w-[90%]">
           <div className="flex justify-between">
-            <div className="sm:w-35 w-25 sm:h-52 h-37 rounded-xl shadow-2xl bg-cover bg-contain bg-auto relative bottom-13 z-30"
+            <div className="sm:w-35 w-25 sm:h-52 h-37 cursor-pointer  rounded-xl shadow-2xl bg-cover bg-contain bg-auto relative bottom-13 z-30"
+              onClick={()=>handlePoster()}
               style={{ backgroundImage: `url(${poster})` }}
             ></div>
             <div className="lg:mr-30 sm:mr-15 ms:mr-5 mr-1 mt-5 sm:mb-0 mb-3 flex flex-col items-center">
