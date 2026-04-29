@@ -56,6 +56,7 @@ export default function ShowDetails() {
   const fetchMovies = async () => {
     try {
       const [movies, castData, sim, vad] = await Promise.all([
+        
         getDetails(media_type, id),
         getCast(media_type, id),
         getSemMovies(media_type, id),
@@ -64,6 +65,7 @@ export default function ShowDetails() {
       if (!movies) throw new Error("Failed to fetch movie details");
 
       setMovieDetails(movies);
+      console.log(movies);
       setCast(castData);
       setSemelarMovies(sim);
       setVadios(vad);
@@ -82,7 +84,7 @@ export default function ShowDetails() {
   fetchMovies();
 }, [id, media_type]);
 
-console.log(vadios)
+
 
   // ✅ كل الـ returns بعد الـ hooks
 if (loading) return <LoadingPage />
@@ -102,7 +104,7 @@ if (!movieDetails) return null
     const handlePoster = ()=>{
     if(!isOpend){
       setValue({cover: poster, size:"sm:w-[30%] w-[90%]", aspect:"aspect-2/3"});
-      console.log(poster);
+      
       open()
     }
 
@@ -122,7 +124,7 @@ if (!movieDetails) return null
   }
 
   const lastTrailerID = vadios[0]?.key;
-  console.log(lastTrailerID);
+  
 
 
   return (<>
@@ -132,6 +134,7 @@ if (!movieDetails) return null
         <meta property="og:title" content={`${title}`} />
         <meta property="og:description" content={movieDetails.overview} />
         <meta property="og:image" content={poster} />
+        <link rel="canonical" href={`https://favo-flicks.vercel.app/details/${media_type}/${id}`} />
       </Helmet>
      {isOpend && <PhotoView/>}
 
@@ -168,7 +171,10 @@ if (!movieDetails) return null
           <div className="">
             <p className="text-muted text-xs">{movieDetails.overview}</p>
           </div>
-        <div className="py-3">{rate !== '0.0'? <span>rate: {rate}⭐</span> :null}</div>
+        <div className="py-5 px-2 w-100% flex items-center justify-between">
+          {rate !== '0.0'? <span>rate: {rate}⭐</span> :null}
+          
+        </div>
 
         
 
@@ -184,6 +190,7 @@ if (!movieDetails) return null
               {lastTrailerID && <VideoPlayer id={lastTrailerID} />}
 
               {media_type === 'tv' && <Seasons seasons={movieDetails.seasons} id={id} media_type={media_type} />}
+
 
               <div className={`my-5 ${media_type === 'movie' ? 'mt-17' : ''}`}>
                 <SideScroll >

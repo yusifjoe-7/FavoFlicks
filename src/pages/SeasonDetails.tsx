@@ -8,7 +8,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MovieIcon from '@mui/icons-material/Movie';
 import { usePhoto } from "../hooks/PhotoViewContext"
 import PhotoView from "../components/PhotoView"
-
+import { Helmet} from "react-helmet-async";
 
 function SeasonDetails() {
      const { season_number, id, media_type } = useParams<{ season_number: string; id: string; media_type: "tv" | "movie"}>()
@@ -53,6 +53,11 @@ const handelBackDrop = (post:string)=>{
   }
   return (
     <>
+    <Helmet>
+            <title>{season?.name}</title>
+            <meta property="og:title" content={`${season?.name}`} />
+            <link rel="canonical" href={`https://favo-flicks.vercel.app/details/${media_type}/${id}/season/${season_number}`} />
+        </Helmet>
     {isOpend && <PhotoView/> }
     <div className="min-h-screen relative bg-bg flex flex-col justify-center overflow-hidden box-border px-5 overflow-x-hidden">
 

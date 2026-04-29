@@ -11,6 +11,8 @@ import ShowDetails from "./pages/showDetails"
 import FoundError from "./pages/FoundError"
 import BottomNav from "./components/BottomNav"
 import SeasonDetails from "./pages/SeasonDetails"
+import ActorDetails from "./pages/ActorDetails"
+
 
 function App() {
   const matchDetails = useMatch("/details/:media_type/:id")
@@ -29,6 +31,7 @@ function App() {
         <Route path="/search" element={<Search/>} />
         <Route path="/details/:media_type/:id" element={<ShowDetails />} />
         <Route path="/details/:media_type/:id/season/:season_number" element={<SeasonDetails />} />
+        <Route path= "actor/:id" element={<ActorDetails />} />
         <Route path="/not-found" element={<FoundError />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

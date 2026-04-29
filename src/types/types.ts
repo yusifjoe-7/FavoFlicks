@@ -13,6 +13,12 @@ export type movie = {
     adult:boolean
 }
 
+type production_companies = {
+    name: string;
+    id: number;
+    logo_path: string | null;
+}
+
 export type movieDetails ={
     id: number
     poster_path: string
@@ -33,6 +39,7 @@ export type movieDetails ={
     genres: { id: number; name: string }[] 
     overview: string
     seasons: seasons[]
+    production_companies: production_companies[]
     
 }
 
