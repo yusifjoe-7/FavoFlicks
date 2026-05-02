@@ -19,14 +19,7 @@ const [hasMore, setHasMore] = useState<boolean>(true);
 const loadingRef = useRef(false);
 const hasMoreRef = useRef(true);
 
-const prevFavoritesRef = useRef(favorites);
 
-useEffect(() => {
-  if (prevFavoritesRef.current !== favorites) {
-    prevFavoritesRef.current = favorites;
-    setPage(1); // هيـ trigger الـ useEffect بتاع الفيتش
-  }
-}, [favorites]);
 
 
 useEffect(() => { loadingRef.current = loading; }, [loading]);
@@ -92,7 +85,7 @@ const handleScroll = useCallback(() => {
     setLoading(false);
     setFrLoading(false);
   }
-}, [page, favorites]);
+}, [page]);
 
   return (<div className="relative min-h-screen bg-bg flex justify-center overflow-hidden">
       <div className="relative z-10 flex flex-col items-center top-20 gap-20 slideFade w-full">
