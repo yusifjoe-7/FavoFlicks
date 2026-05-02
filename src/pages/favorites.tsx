@@ -109,9 +109,6 @@ const handleScroll = useCallback(() => {
         {/* ✅ endRef دايماً موجود في الـ DOM */}
         <div ref={endRef} className="h-2 w-full" />
 
-        
-        
-
       
       </div>
     </div>
