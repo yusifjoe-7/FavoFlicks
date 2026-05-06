@@ -82,7 +82,7 @@ const handelBackDrop = (post:string)=>{
         </div>
                     
       <div className="flex flex-col items-center mt-25 sm:px-10 px-4 ">
-        {loading && <LoadingStar/>
+        {loading && <span className="suv-bounce"><LoadingStar/></span>
         }
         <h2 className="sm:text-3xl text-xl "> {season?.name}</h2>
         <h4 className="mt-2 mb-5 text sm:text-sm text-xs text-muted">{season?.air_date}</h4>

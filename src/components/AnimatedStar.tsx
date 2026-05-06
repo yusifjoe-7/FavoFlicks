@@ -55,7 +55,7 @@ export default function AnimatedStar() {
     <>
       {/* النجمة من اليمين */}
       <div
-        className={`fixed sm:top-40 top-60 z-700 transition-all duration-700 ease-in-out ${
+        className={`fixed top-40  z-700 transition-all duration-700 ease-in-out ${
           visible ? "right-8" : "-right-24"
         }`}
       >
@@ -74,7 +74,7 @@ export default function AnimatedStar() {
 
       {/* الرسالة منفصلة تحت النجمة */}
       <div
-        className={`fixed sm:top-60 top-80 z-700 transition-all duration-700 ease-in-out ${
+        className={`fixed top-60 z-700 transition-all duration-700 ease-in-out ${
           visible
             ? "right-4 opacity-100"
             : "-right-40 opacity-0"
