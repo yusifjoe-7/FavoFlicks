@@ -30,8 +30,8 @@ export default defineConfig({
     VitePWA({registerType: 'autoUpdate',
       includeAssets: ['icons/icon-192.png', 'icons/icon-512.png'],
       manifest: {
-        name: 'CineStream films',
-        short_name: 'CineSream',
+        name: 'FavoFlicks films',
+        short_name: 'FavoFlicks',
         theme_color: '#221A47',
         background_color: '#0F1115',
         display: 'standalone',

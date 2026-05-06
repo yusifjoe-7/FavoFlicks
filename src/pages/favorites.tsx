@@ -3,6 +3,7 @@ import type { movie } from "../types/types";
 import { useFavorites } from "../hooks/favoriteContext";
 import { getDetails } from "../API/moviesDetailsAPI";
 import Card from "../components/card";
+import LoadingStar from "../components/loadingStar";
 
 export default function Favorites() {
   const { favorites } = useFavorites();
@@ -106,7 +107,7 @@ const handleScroll = useCallback(() => {
           <p className="text-muted">No favorites yet. Start adding some! ❤️</p>
         )}
         {!loading && frLoading && movies.length >= 0 && (
-          <span className="suv-around w-1 h-4 mx-2 rounded-full bg-accent"></span>
+          <span className="suv-around"><LoadingStar  /></span>
         )}
         {/* ✅ الـ cards دايماً موجودة في الـ DOM */}
         <div className="sm:w-[90%] w-full flex justify-center gap-5 flex-wrap items-center slideFade mb-30">
@@ -114,7 +115,7 @@ const handleScroll = useCallback(() => {
             <Card key={m.id} data={m} />
           ))}
         </div>
-        {loading && <span className="suv-around w-1 h-4 mx-2 rounded-full bg-accent -translate-y-30"></span>}
+        {loading && <span className="suv-around -translate-y-30"><LoadingStar /></span>}
 
         {/* ✅ endRef دايماً موجود في الـ DOM */}
         <div ref={endRef} className="h-2 w-full" />

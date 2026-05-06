@@ -38,16 +38,16 @@ useEffect(() => {
                 <Link to={"/"}>
   <div className="flex items-center gap-2 group cursor-pointer">
     {/* Star icon */}
-    {/* <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <polygon
         points="9,1 11,6.5 17,6.5 12.5,10 14,16 9,12.5 4,16 5.5,10 1,6.5 7,6.5"
-        fill="#6366F1"
+        fill="var(--color-accent)"
       />
-    </svg> */}
+    </svg> 
     {/* Text */}
     <h3 className="sm:text-lg text-base font-serif tracking-tight leading-none flex items-center gap-1">
-      <span className="text-muted">CINE</span>
-      <span className="text-accent curseve text-3xl">stream</span>
+      <span className="text-muted">Favo</span>
+      <span className="text-accent curseve text-2xl">Filcks</span>
     </h3>
   </div>
 </Link>
