@@ -58,6 +58,7 @@ export default function AnimatedStar() {
         className={`fixed top-40  z-700 transition-all duration-700 ease-in-out ${
           visible ? "right-8" : "-right-24"
         }`}
+        onClick={()=>setVisible(false)}
       >
         <svg
           className="w-20 h-20 sm:w-14 sm:h-14"

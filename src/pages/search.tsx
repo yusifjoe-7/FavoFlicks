@@ -34,7 +34,7 @@ const [searchParams] = useSearchParams();
     <div className="relative min-h-screen bg-bg flex justify-center overflow-hidden">
           <div className="relative z-10 flex flex-col items-center top-20 gap-20 slideFade w-full">
     
-            <div className="w-full px-20 ">
+            <div className="w-full px-20 flex items-center justify-center ">
               <h1 className="text-accent text-4xl curseve flex items-center">you searched for <span className=" text-amber-50 ml-3 sm:text-xl text-sm font-serif"> {query}</span></h1>
             </div>
             <AppSearchBar />

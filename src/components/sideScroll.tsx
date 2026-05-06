@@ -41,14 +41,14 @@ export default function SideScroll({ children }: { children: ReactNode }) {
       <ChevronLeftIcon
         sx={{ fontSize: 35, display: { xs: 'none', sm: 'block' } }}
         onClick={() => scroll("left")}
-        className={`absolute left-2 top-1/2 -translate-y-1/2 z-40 p-2 bg-bg rounded-2xl transition-opacity duration-300
+        className={`absolute left-2 top-1/2 -translate-y-1/2 z-40 p-2 bg-bg rounded-2xl transition-opacity cursor-pointer duration-300
           ${showLeft ? "opacity-100" : "opacity-0 pointer-events-none"}`}
       />
 
       <ChevronRightIcon
         sx={{ fontSize: 35, display: { xs: 'none', sm: 'block' } }}
         onClick={() => scroll("right")}
-        className={`absolute right-2 top-1/2 -translate-y-1/2 z-40 p-2 bg-bg rounded-2xl transition-opacity duration-300
+        className={`absolute right-2 top-1/2 -translate-y-1/2 z-40 p-2 bg-bg rounded-2xl transition-opacity cursor-pointer duration-300
           ${showRight ? "opacity-100" : "opacity-0 pointer-events-none"}`}
       />
 
