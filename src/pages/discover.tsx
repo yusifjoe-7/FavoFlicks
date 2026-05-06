@@ -75,22 +75,22 @@ export default function Discover() {
     }, []);
 
   return (
-  <div className="min-h-screen bg-bg py-5">
-    <span className="block text-2xl sm:text-3xl font-bold ml-10 sm:ml-20 sm:mt-3 mt-5 sm:mb-10 mb-5">- trending <span className="curseve text-accent">today</span></span>
+  <div className="min-h-screen bg-bg py-5 ">
+    <span className="block text-2xl sm:text-3xl font-bold ml-10 sm:ml-20 sm:mt-3 mt-5 sm:mb-10 mb-5">trending <span className="curseve text-accent">today</span></span>
     <SideScroll>
      {loading
                  ? Array.from({ length: skeletonLenth }).map((_, i) => <SkeletonCard key={i} />)
                  : Amovies.map((m: movie) => <Card key={m.id} data={m} />)
                }
     </SideScroll>
-    <span className="block text-2xl sm:text-3xl font-bold ml-10 sm:ml-20 sm:mb-10 my-5">- top rated <span className="curseve text-accent">movies</span></span>
+    <span className="block text-2xl sm:text-3xl font-bold ml-10 sm:ml-20 sm:mb-10 my-5">top rated <span className="curseve text-accent">movies</span></span>
     <SideScroll>
      {loading
                  ? Array.from({ length: skeletonLenth }).map((_, i) => <SkeletonCard key={i} />)
                  : Hmovies.map((m: movie) => <Card key={m.id} data={m} index="movie" />)
                }
     </SideScroll>
-    <span className="block text-2xl sm:text-3xl font-bold ml-10 sm:ml-20 sm:mb-10 my-5">- top rated <span className="curseve text-accent">tv shows</span></span>
+    <span className="block text-2xl sm:text-3xl font-bold ml-10 sm:ml-20 sm:mb-10 my-5">top rated <span className="curseve text-accent">tv shows</span></span>
     <SideScroll>
      {loading
                  ? Array.from({ length: skeletonLenth }).map((_, i) => <SkeletonCard key={i} />)
@@ -98,14 +98,14 @@ export default function Discover() {
                }
     </SideScroll>
 
-    <span className="block text-2xl sm:text-3xl font-bold ml-10 sm:ml-20 sm:mb-10 my-5">- discover <span className="curseve text-accent">movies</span></span>
+    <span className="block text-2xl sm:text-3xl font-bold ml-10 sm:ml-20 sm:mb-10 my-5">discover <span className="curseve text-accent">movies</span></span>
 <SideScroll>
      {loading
                  ? Array.from({ length: skeletonLenth }).map((_, i) => <SkeletonCard key={i} />)
                  : Fmovies.map((m: movie) => <Card key={m.id} data={m} index="movie" />)
                }
     </SideScroll>
-    <span className="block text-2xl sm:text-3xl font-bold ml-10 sm:ml-20 sm:mb-10 my-5">- discover <span className="curseve text-accent">tv shows</span></span>
+    <span className="block text-2xl sm:text-3xl font-bold ml-10 sm:ml-20 sm:mb-10 my-5">discover <span className="curseve text-accent">tv shows</span></span>
 <SideScroll>
      {loading
                  ? Array.from({ length: skeletonLenth }).map((_, i) => <SkeletonCard key={i} />)

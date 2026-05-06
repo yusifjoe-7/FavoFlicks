@@ -12,7 +12,7 @@ import FoundError from "./pages/FoundError"
 import BottomNav from "./components/BottomNav"
 import SeasonDetails from "./pages/SeasonDetails"
 import ActorDetails from "./pages/ActorDetails"
-
+import AnimatedStar from "./components/AnimatedStar"
 
 function App() {
   const matchDetails = useMatch("/details/:media_type/:id")
@@ -24,6 +24,7 @@ function App() {
   return (
     <div className="text-text bg-bg w-full overflow-x-hidden">
       {!hideNav&& <Nav />}
+      <AnimatedStar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/discover" element={<Discover />} />

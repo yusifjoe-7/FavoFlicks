@@ -9,6 +9,7 @@ import MovieIcon from '@mui/icons-material/Movie';
 import { usePhoto } from "../hooks/PhotoViewContext"
 import PhotoView from "../components/PhotoView"
 import { Helmet} from "react-helmet-async";
+import LoadingStar from "../components/loadingStar"
 
 function SeasonDetails() {
   const {isOpend, open , setValue, close} = usePhoto();
@@ -81,7 +82,7 @@ const handelBackDrop = (post:string)=>{
         </div>
                     
       <div className="flex flex-col items-center mt-25 sm:px-10 px-4 ">
-        {loading &&  <img src={"/favoflicks_star.svg"} alt="loading suv" className="suv-around w-5 mx-2" />
+        {loading && <LoadingStar/>
         }
         <h2 className="sm:text-3xl text-xl "> {season?.name}</h2>
         <h4 className="mt-2 mb-5 text sm:text-sm text-xs text-muted">{season?.air_date}</h4>
