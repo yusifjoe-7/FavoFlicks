@@ -1,26 +1,43 @@
 @import "tailwindcss";
 
-@theme {
-    --color-bg: #0F1115;          
+@theme{
+  --color-bg: 'var(--color-bg)';
+  --color-bg-secondary: 'var(--color-bg-secondary)';          
+  --color-card: 'var(--color-card)';        
+  --color-card-alt: 'var(--color-card-alt)';    
+  --color-surface: 'var(--color-surface)';     
+  --color-border: 'var(--color-border)';      
+  --color-accent: 'var(--color-accent)';      
+  --color-accent-red: 'var(--color-accent-red)';  
+  --color-accent-blue: 'var(--color-accent-blue)'; 
+  --color-text: 'var(--color-text)';        
+  --color-muted: 'var(--color-muted)';       
+}
+
+
+
+
+:root {
+    --color-bg: #0F0A0A;          
     /* main page background */
 
-    --color-bg-secondary: #404860; 
+    --color-bg-secondary: #3D1A1A; 
     /* secondary background (search bar, navbar sections) */
 
-    --color-card: #171A23;        
+    --color-card:#171717;        
     /* card background */
 
-    --color-card-alt: #1E2230;    
+    --color-card-alt: #1E0E0E;    
     /* elevated card */
 
-    --color-surface: #232738;     
+    --color-surface: #2A1010;     
     /* inputs, dropdowns, tooltips */
 
-    --color-border: #2E3345;      
+    --color-border: #3D1515;      
     /* borders */
 
-    --color-accent: #6366F1;      
-    /* modern indigo primary */
+    --color-accent: #be0000;      
+    /* bloody red primary */
 
     --color-accent-red: #EF4444;  
     /* alert / badge */
@@ -34,6 +51,7 @@
     --color-muted: #9CA3AF;       
     /* secondary text */
 }
+
 *{
     font-family: sans-serif;
 }

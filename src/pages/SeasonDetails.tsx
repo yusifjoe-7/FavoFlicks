@@ -11,6 +11,7 @@ import PhotoView from "../components/PhotoView"
 import { Helmet} from "react-helmet-async";
 
 function SeasonDetails() {
+  const {isOpend, open , setValue, close} = usePhoto();
      const { season_number, id, media_type } = useParams<{ season_number: string; id: string; media_type: "tv" | "movie"}>()
      const navigate = useNavigate()
 
@@ -21,6 +22,8 @@ if (media_type !== "tv" && media_type !== "movie") {
   return <Navigate to="/" /> // أو أي error handling
 }
     useEffect(() => {
+      close();
+  
   const fetchSeason = async () => {
     try {
       const results: any = await getSeason(media_type, id!, season_number!);
@@ -42,7 +45,7 @@ if (media_type !== "tv" && media_type !== "movie") {
 
 
 
-const {isOpend, open , setValue} = usePhoto();
+
 
 
 const handelBackDrop = (post:string)=>{

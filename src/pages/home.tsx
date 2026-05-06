@@ -22,6 +22,11 @@ export default function Home() {
         getPopularMovies(2),
         getPopularMovies(3),
       ]);
+
+       // const data = await getPopularMovies(1);
+        // const data2 = await getPopularMovies(2);
+        // const data3 = await getPopularMovies(3);
+
       
       if(!data || !data2 || !data3) throw new Error("Failed to fetch movies");
 

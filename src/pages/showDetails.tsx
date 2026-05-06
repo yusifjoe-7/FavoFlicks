@@ -25,7 +25,7 @@ import PhotoView from "../components/PhotoView";
 
 export default function ShowDetails() {
 
-  const {isOpend, open , setValue} = usePhoto();
+  const {isOpend, open , setValue, close} = usePhoto();
 
 
 
@@ -44,6 +44,8 @@ export default function ShowDetails() {
   const navigate = useNavigate()
 
  useEffect(() => {
+  close();
+
   if (!id || !media_type) return;
 
   window.scrollTo(0, 0);

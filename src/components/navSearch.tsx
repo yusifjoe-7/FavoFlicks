@@ -21,7 +21,7 @@ export default function NavSearch() {
   <TextField
   value={inputValue}
   onChange={(e:React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
-    placeholder="Search..."
+    placeholder="movies, tv shows"
     size="small"
     fullWidth
     variant="outlined"
@@ -33,7 +33,7 @@ export default function NavSearch() {
     sx={{
       "& .MuiOutlinedInput-root": {
         borderRadius: "16px",
-        background: "#404860",
+        background: "var(--color-bg-secondary)",
         // صغّر الـ padding على شاشات صغيرة
         padding: { xs: "0px", sm: "2px" }
       },

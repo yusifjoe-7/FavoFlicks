@@ -6,6 +6,8 @@ import Card from "../components/card";
 
 export default function Favorites() {
   const { favorites } = useFavorites();
+  
+
   const [movies, setMovies] = useState<movie[]>([]);
 
   const [frLoading, setFrLoading] = useState(false);
@@ -26,6 +28,8 @@ useEffect(() => { loadingRef.current = loading; }, [loading]);
 useEffect(() => { hasMoreRef.current = hasMore; }, [hasMore]);
 
 const handleScroll = useCallback(() => {
+
+  
   if (
     window.innerHeight + document.documentElement.scrollTop + 50 >=
       document.documentElement.offsetHeight &&
@@ -43,10 +47,13 @@ const handleScroll = useCallback(() => {
  
 
   useEffect(() => {
+   
   const fetchFavorites = async () => {
     page === 1 ? setFrLoading(true) : setLoading(true);
 
     const favoritesToFetch = favorites.slice((page - 1) * limit, page * limit);
+    
+
 
     if (favoritesToFetch.length === 0) {
       setHasMore(false);
@@ -87,16 +94,19 @@ const handleScroll = useCallback(() => {
   }
 }, [page]);
 
+
+
+
   return (<div className="relative min-h-screen bg-bg flex justify-center overflow-hidden">
       <div className="relative z-10 flex flex-col items-center top-20 gap-20 slideFade w-full">
         <h1 className="text-accent text-4xl curseve">My Favorites</h1>
 
         {/* ✅ حالة مفيش favorites خالص */}
-        {!loading && !frLoading && movies.length === 0 && (
+        {!loading && !frLoading && !hasMore && movies.length === 0 && (
           <p className="text-muted">No favorites yet. Start adding some! ❤️</p>
         )}
         {!loading && frLoading && movies.length >= 0 && (
-          <img src={"/favoflicks_star.svg"} alt="loading suv" className="suv-around w-5 mx-2" />
+          <span className="suv-around w-1 h-4 mx-2 rounded-full bg-accent"></span>
         )}
         {/* ✅ الـ cards دايماً موجودة في الـ DOM */}
         <div className="sm:w-[90%] w-full flex justify-center gap-5 flex-wrap items-center slideFade mb-30">
@@ -104,7 +114,7 @@ const handleScroll = useCallback(() => {
             <Card key={m.id} data={m} />
           ))}
         </div>
-        {loading && <img src={"/favoflicks_star.svg"} alt="loading suv" className="suv-around w-5 -translate-y-25" />}
+        {loading && <span className="suv-around w-1 h-4 mx-2 rounded-full bg-accent -translate-y-30"></span>}
 
         {/* ✅ endRef دايماً موجود في الـ DOM */}
         <div ref={endRef} className="h-2 w-full" />
