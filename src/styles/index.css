@@ -15,10 +15,13 @@
 }
 
 
+/* .bg-bg{
+  background-image: linear-gradient(to bottom,#000000 , #301111 );
+} */
 
 
 :root {
-    --color-bg: #0F0A0A;          
+     --color-bg: #0F0A0A;          
     /* main page background */
 
     --color-bg-secondary: #3D1A1A; 
