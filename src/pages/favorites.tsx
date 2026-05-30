@@ -6,7 +6,7 @@ import Card from "../components/card";
 import LoadingStar from "../components/loadingStar";
 
 export default function Favorites() {
-  const { favorites } = useFavorites();
+  const { favorites, isLoaded } = useFavorites();
   
 
   const [movies, setMovies] = useState<movie[]>([]);
@@ -48,6 +48,16 @@ const handleScroll = useCallback(() => {
  
 
   useEffect(() => {
+
+    if (!isLoaded) return
+
+     if (favorites.length === 0) {
+    setMovies([]);
+    setLoading(false);
+    setFrLoading(false);
+    return;
+  }
+  console.log(favorites)
    
   const fetchFavorites = async () => {
     page === 1 ? setFrLoading(true) : setLoading(true);
@@ -93,7 +103,7 @@ const handleScroll = useCallback(() => {
     setLoading(false);
     setFrLoading(false);
   }
-}, [page]);
+}, [page, isLoaded]);
 
 
 
@@ -103,10 +113,10 @@ const handleScroll = useCallback(() => {
         <h1 className="text-accent text-4xl curseve">My Favorites</h1>
 
         {/* ✅ حالة مفيش favorites خالص */}
-        {!loading && !frLoading && !hasMore && movies.length === 0 && (
+        {!loading && !frLoading && movies.length === 0 && (
           <p className="text-muted">No favorites yet. Start adding some! ❤️</p>
         )}
-        {!loading && frLoading && movies.length >= 0 && (
+        {!loading && frLoading && movies.length >= 0  &&(
           <span className="suv-around"><LoadingStar  /></span>
         )}
         {/* ✅ الـ cards دايماً موجودة في الـ DOM */}

@@ -11,12 +11,15 @@ type FavoritesContextType = {
   favorites: FavoriteItem[];
   toggleFavorite: (item: FavoriteItem) => void;
   isFavorite: (id: string) => boolean;
+  isLoaded: boolean;
 };
  
 const FavoritesContext = createContext<FavoritesContextType | null>(null);
  
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  
  
   // load favorites from localStorage
   useEffect(() => {
@@ -24,6 +27,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     if (stored) {
       setFavorites(JSON.parse(stored));
     }
+    setIsLoaded(true);
   }, []);
  
   // toggle favorite
@@ -43,7 +47,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   };
  
   return (
-    <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite }}>
+    <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite, isLoaded }}>
       {children}
     </FavoritesContext.Provider>
   );
